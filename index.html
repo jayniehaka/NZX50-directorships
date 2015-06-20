@@ -16,6 +16,7 @@
     <style>
       body {
         padding-top: 25px;
+        background-color: #f3f4ef;
       }
 
       .node {
@@ -32,8 +33,8 @@
         position: absolute;
         padding: 8px 16px;
         text-align: center;
-        font: 15px sans-serif;
-        background: #f3f4ef;
+        font: 15px Helvetica, sans-serif;
+        background: #E2E2E2;
         pointer-events: none;
       }
 
@@ -98,6 +99,7 @@
           .on("mousemove", function(d){mousemove(d);})
           .on("mouseout", mouseout)
           .attr("r", 10)
+          .style("stroke-width", 0)
           .style("fill", function(d) {
             if (d.group === "Company") {
                 return "#ff2800";
@@ -112,7 +114,8 @@
               return d.name;
             } else {
               return "";
-            }});
+          }})
+          .attr("class","h4");
 
       //node.append("title")
       //  .text(function (d) { return d.name; });
