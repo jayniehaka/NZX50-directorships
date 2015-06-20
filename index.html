@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>The NZX50 Directorships Graph</title>
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+
+    <style>
+      body {
+        padding-top: 25px;
+      }
+
+      .node {
+        stroke: #fff;
+        stroke-width: 1.5px;
+      }
+
+      .link {
+        stroke: #999;
+        stroke-opacity: .6;
+      }
+      
+      div.tooltip {
+        position: absolute;
+        padding: 8px 16px;
+        text-align: center;
+        font: 15px sans-serif;
+        background: #f3f4ef;
+        pointer-events: none;
+      }
+
+    </style>
+
+</head>
+
+  <div class="container-fluid">
+      <div class="col-lg-12 text-center">
+          <h1>The NZX50 Directorships Graph</h1>
+          <p class="lead" >By <a href="https://twitter.com/Jayniehaka">@jayniehaka</a></p>
+          <div id="area1"></div>
+      </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+    var width = 1200,
+        height = 1200;
+
+    var color = d3.scale.category20();
+
+    var force = d3.layout.force()
+        .charge(-100)
+        .linkDistance(50)
+        .size([width, height]);
+
+    var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 1e-6);
+
+    var svg = d3.select("#area1").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    d3.json("companies.json", function(error, graph) {
+      if (error) throw error;
+
+      force
+          .nodes(graph.nodes)
+          .links(graph.links)
+          .start();
+
+      var link = svg.selectAll(".link")
+          .data(graph.links)
+          .enter().append("line")
+          .attr("class", "link")
+          .style("stroke-width", 2);
+
+      var node = svg.selectAll(".node")
+          .data(graph.nodes)
+          .enter().append("g")
+          .call(force.drag);
+
+      node.append("circle")
+          .attr("class", "node")
+          .on("mouseover", mouseover)
+          .on("mousemove", function(d){mousemove(d);})
+          .on("mouseout", mouseout)
+          .attr("r", 10)
+          .style("fill", function(d) {
+            if (d.group === "Company") {
+                return "#ff2800";
+            } else {
+                return "#00B9E7";
+            }
+          });
+
+      node.append("text")
+          .text(function (d) {
+            if (d.group === "Company") {
+              return d.name;
+            } else {
+              return "";
+            }});
+
+      //node.append("title")
+      //  .text(function (d) { return d.name; });
+
+      force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+
+      node.attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+      });
+    });
+  
+    function mouseover() {
+        div.transition()
+        .duration(300)
+        .style("opacity", 1);
+    }
+
+    function mousemove(d) {
+        div
+        .text(d.fullname)
+        .style("left", (d3.event.pageX ) + "px")
+        .style("top", (d3.event.pageY) + "px");
+    }
+
+    function mouseout() {
+        div.transition()
+        .duration(300)
+        .style("opacity", 1e-6);
+    }
+
+  </script>
+</body>
+
+
