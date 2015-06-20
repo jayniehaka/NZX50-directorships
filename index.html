@@ -11,7 +11,7 @@
 
     <title>The NZX50 Directorships Graph</title>
 
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <style>
       body {
@@ -51,8 +51,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <script type="text/javascript">
 
@@ -74,7 +73,7 @@
         .attr("width", width)
         .attr("height", height);
 
-    d3.json("companies.json", function(error, graph) {
+    d3.json("directorships.json", function(error, graph) {
       if (error) throw error;
 
       force
