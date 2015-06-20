@@ -9,4 +9,4 @@ Some directors may have been duplicated if they are recorded on the Companies Of
 There were three entities which are not on the Companies Office register because they are not companies: FSF, GMT and VHP. Fonterra Shareholders' Fund is a special unit trust which allows outside investors to hold shares in Fonterra. It is managed by FSF Management Company Limited. Goodman Property Trust is managed by Goodman (NZ) Limited, the New Zealand Subsidiary of the ASX listed Goodman Group. Vital Healthcare Property Trust is managed by Vital Healthcare Management Limited. In each of these cases I used the Companies Office record for the management company.
 
 ###Force-directed graph visualisation
-The force-directed graph visualisation is based off Mike Bostock's [Les Misérables character graph](http://bl.ocks.org/mbostock/4062045).
+The force-directed graph visualisation uses the [D3.js](http://d3js.org/) JavaScript library and is based on Mike Bostock's [Les Misérables character graph](http://bl.ocks.org/mbostock/4062045).
