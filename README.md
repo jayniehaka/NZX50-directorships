@@ -4,7 +4,7 @@ This graph shows companies listed on the NZX50 (red nodes) and their directors (
 It can be viewed here: http://jayniehaka.github.io/NZX50-directorships/
 
 ### Data
-These data were sourced from the [NZX](https://www.nzx.com/markets/nzsx/indices/NZ50) and [New Zealand Companies Office](http://www.business.govt.nz/companies) websites. Last updated in June 2015.
+These data were sourced from the [NZX](https://www.nzx.com/markets/nzsx/indices/NZ50) and [New Zealand Companies Office](http://www.business.govt.nz/companies) websites.
 
 Some directors may have been duplicated if they are recorded on the Companies Office under different names (for example, with their middle name and without their middle name).
 
